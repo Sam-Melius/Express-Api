@@ -12,15 +12,23 @@ describe('Express-Api routes', () => {
   afterAll(() => {
     pool.end();
   });
-});
 
-it('creates a monster', async () => {
-  const expected = {
-    name: 'Blubber',
-    type: 'Goo',
-    size: 2,
-  };
-  const res = await request(app).post('/api/v1/monsters').send(expected);
 
-  expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  it('creates a monster', async () => {
+    const expected = {
+      name: 'Blubber',
+      type: 'Goo',
+      size: 2,
+    };
+    const res = await request(app).post('/api/v1/monsters').send(expected);
+
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
+
+  it('gets a list', async () => {
+    const expected = await Monster.findAll();
+    const res = await request(app).get('/api/v1/monsters');
+
+    expect(res.body).toEqual(expected);
+  });
 });
