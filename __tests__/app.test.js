@@ -39,4 +39,11 @@ describe('Express-Api routes', () => {
     expect(res.body).toEqual(expected);
   });
 
+  it('deletes a monster by id', async () => {
+    const expected = await Monster.findById(1);
+    const res = await request(app).delete(`/api/v1/monsters/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
+
 });
