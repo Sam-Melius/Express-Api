@@ -46,4 +46,18 @@ describe('Express-Api routes', () => {
     expect(res.body).toEqual(expected);
   });
 
+  it('updates a monster by id', async () => {
+    const expected = {
+      id: expect.any(String),
+      name: 'Blubber',
+      type: 'Goo',
+      size: 3
+    };
+    const res = await request(app)
+      .patch('/api/v1/monsters/1')
+      .send({ size: 3 });
+
+    expect(res.body).toEqual(expected);
+  });
+
 });
