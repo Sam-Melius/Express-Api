@@ -31,4 +31,12 @@ describe('Express-Api routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('gets by id', async () => {
+    const expected = await Monster.findById(1);
+    const res = await request(app).get(`/api/v1/monsters/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
+
 });
